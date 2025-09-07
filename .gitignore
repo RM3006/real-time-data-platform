@@ -205,3 +205,18 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Fichiers d'état locaux de Terraform
+*.tfstate
+*.tfstate.*
+
+# Dossiers locaux .terraform
+**/.terraform/*
+
+# Fichiers de log de crash
+crash.log
+
+# Ignore les fichiers d'environnement virtuel Python
+**/wiki_env/
+**/dbt_env
