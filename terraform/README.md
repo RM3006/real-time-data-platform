@@ -1,0 +1,1 @@
+This folder contains infrastructure definition of AWS for this project. Infrastructure is handled using Terraform (Infra as Code). TO deploy, run "terraform apply" in the terminal.
