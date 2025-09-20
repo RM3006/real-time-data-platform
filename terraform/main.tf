@@ -23,13 +23,3 @@ resource "random_string" "bucket_suffix" {
   special = false
   upper   = false
 }
-
-# Ressource 2 : Le flux de données Kinesis pour les événements en temps réel
-resource "aws_kinesis_stream" "events_stream" {
-  name        = "${local.project_name}-events-stream"
-  shard_count = 1 # 1 shard est suffisant et reste dans le free tier
-
-  tags = {
-    Project = local.project_name
-  }
-}
