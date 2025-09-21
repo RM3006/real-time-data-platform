@@ -30,20 +30,20 @@ resource "aws_iam_role_policy_attachment" "lambda_attach" {
   policy_arn = aws_iam_policy.lambda_parquet_converter_policy.arn
 }
 
-# 5. La fonction Lambda, maintenant définie à partir d'une image Docker
+# 5. La fonction Lambda, créée avec un code factice. CodeBuild la mettra à jour.
 resource "aws_lambda_function" "parquet_converter" {
-  # On spécifie le type de paquet et le nom de la fonction
-  package_type  = "Image"
+  # --- MODIFICATION CRUCIALE ---
+  # On fournit un fichier .zip factice pour satisfaire la validation de Terraform
+  filename      = "../lambda_converter/dummy_package.zip"
+  package_type  = "Zip"
+  handler       = "index.handler" 
+  runtime       = "python3.12"
+  # ----------------------------
+  
   function_name = "${local.project_name}-parquet-converter"
   role          = aws_iam_role.lambda_parquet_converter_role.arn
-  
-  # On augmente les ressources, car les conteneurs sont plus exigeants
-  timeout     = 120 # 2 minutes
-  memory_size = 512 # 512 MB
-
-  # Le champ le plus important : l'URI de l'image. 
-  # Il sera rempli à l'étape suivante, pour l'instant on met une valeur temporaire.
-  image_uri = "${aws_ecr_repository.lambda_converter_repo.repository_url}:latest"
+  timeout       = 120
+  memory_size   = 512
 
   environment {
     variables = { S3_BUCKET_NAME = aws_s3_bucket.data_lake.bucket }
