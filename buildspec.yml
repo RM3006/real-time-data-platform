@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo "Build started on `date`"
+      - echo "Building the Docker image for amd64..."
+      # On force l'architecture ici, même si l'environnement est déjà le bon
+      - docker build --platform linux/amd64 -t $IMAGE_REPO_URI:$IMAGE_TAG -f Dockerfile.lambda .
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+      - echo "Pushing the Docker image to ECR..."
+      - docker push $IMAGE_REPO_URI:$IMAGE_TAG
+      - echo "Updating Lambda function..."
+      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $IMAGE_REPO_URI:$IMAGE_TAG
