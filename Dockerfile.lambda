@@ -1,0 +1,17 @@
+# Fichier: Dockerfile.lambda
+
+# Partir de l'image de base officielle d'AWS pour Python 3.12
+FROM public.ecr.aws/lambda/python:3.12
+
+# Copier le fichier des dépendances
+COPY lambda_converter/requirements.txt ${LAMBDA_TASK_ROOT}/
+
+# Installer les dépendances
+# Le --target permet de s'assurer que les libs sont au bon endroit
+RUN pip install -r ${LAMBDA_TASK_ROOT}/requirements.txt --target "${LAMBDA_TASK_ROOT}"
+
+# Copier notre code de fonction
+COPY lambda_converter/parquet_converter.py ${LAMBDA_TASK_ROOT}/
+
+# Définir le "handler" (la fonction à appeler) que Lambda utilisera
+CMD [ "parquet_converter.lambda_handler" ]
