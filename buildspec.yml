@@ -1,3 +1,4 @@
+# Fichier: buildspec.yml
 version: 0.2
 
 phases:
@@ -9,12 +10,11 @@ phases:
     commands:
       - echo "Build started on `date`"
       - echo "Building the Docker image for amd64..."
-      # On force l'architecture ici, même si l'environnement est déjà le bon
-      - docker build --platform linux/amd64 -t $IMAGE_REPO_URI:$IMAGE_TAG -f Dockerfile.lambda .
+      - docker build -t $IMAGE_REPO_URI:$IMAGE_TAG -f Dockerfile.lambda .
   post_build:
     commands:
       - echo "Build completed on `date`"
       - echo "Pushing the Docker image to ECR..."
       - docker push $IMAGE_REPO_URI:$IMAGE_TAG
-      - echo "Updating Lambda function..."
+      - echo "Updating Lambda function with new image..."
       - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $IMAGE_REPO_URI:$IMAGE_TAG

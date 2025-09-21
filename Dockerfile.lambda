@@ -7,7 +7,6 @@ FROM public.ecr.aws/lambda/python:3.12
 COPY lambda_converter/requirements.txt ${LAMBDA_TASK_ROOT}/
 
 # Installer les dépendances
-# Le --target permet de s'assurer que les libs sont au bon endroit
 RUN pip install -r ${LAMBDA_TASK_ROOT}/requirements.txt --target "${LAMBDA_TASK_ROOT}"
 
 # Copier notre code de fonction

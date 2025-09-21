@@ -79,27 +79,11 @@ resource "aws_codebuild_project" "image_builder" {
 
   source {
     type      = "GITHUB"
-    location  = "https://github.com/RM3006/real-time-data-platform.git" # <-- N'OUBLIEZ PAS DE MODIFIER
+    location  = "https://github.com/RM3006/real-time-data-platform.git" 
     buildspec = "buildspec.yml"
   }
 }
 
-# --- NOUVEAU BLOC ---
-# 6. Définition du Webhook comme une ressource séparée
-resource "aws_codebuild_webhook" "trigger" {
-  project_name = aws_codebuild_project.image_builder.name
-
-  filter_group {
-    filter {
-      type    = "EVENT"
-      pattern = "PUSH"
-    }
-    filter {
-      type    = "HEAD_REF"
-      pattern = "refs/heads/main"
-    }
-  }
-}
 
 # 7. Data source pour récupérer l'ID du compte
 data "aws_caller_identity" "current" {}
