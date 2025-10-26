@@ -17,3 +17,7 @@ Les items relatifs à ce process sont stockés dans le dossier "producer"
 
 --test trigger for code build
 
+
+
+aws id :056244392718
+

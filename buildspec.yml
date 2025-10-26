@@ -1,20 +1,28 @@
-# Fichier: buildspec.yml
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      python: 3.12
   pre_build:
     commands:
+      - echo "Downloading source code from S3..."
+      # Use the environment variable for the bucket name
+      - aws s3 cp s3://$S3_BUCKET_NAME/source.zip .
+      - echo "Unzipping source code..."
+      - unzip source.zip
       - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
       - echo "Build started on `date`"
-      - echo "Building the Docker image for amd64..."
+      - echo "Building the Docker image..."
+      # Ensure buildspec uses the correct Dockerfile name if it differs
       - docker build -t $IMAGE_REPO_URI:$IMAGE_TAG -f Dockerfile.lambda .
   post_build:
     commands:
       - echo "Build completed on `date`"
       - echo "Pushing the Docker image to ECR..."
       - docker push $IMAGE_REPO_URI:$IMAGE_TAG
-      - echo "Updating Lambda function with new image..."
+      - echo "Updating Lambda function..."
       - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $IMAGE_REPO_URI:$IMAGE_TAG

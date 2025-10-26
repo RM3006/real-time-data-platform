@@ -17,6 +17,14 @@ resource "aws_s3_bucket" "data_lake" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "data_lake_versioning" {
+  bucket = aws_s3_bucket.data_lake.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 # Génère une chaîne aléatoire pour rendre le nom du bucket S3 unique
 resource "random_string" "bucket_suffix" {
   length  = 8

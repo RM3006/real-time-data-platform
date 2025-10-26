@@ -30,27 +30,22 @@ resource "aws_iam_role_policy_attachment" "lambda_attach" {
   policy_arn = aws_iam_policy.lambda_parquet_converter_policy.arn
 }
 
-# 5. La fonction Lambda, créée avec un code factice. CodeBuild la mettra à jour.
+# 5. La fonction Lambda, créée avec le code factice. CodeBuild la mettra à jour plus tard.
 resource "aws_lambda_function" "parquet_converter" {
-  # --- MODIFICATION CRUCIALE ---
-  # On fournit un fichier .zip factice pour satisfaire la validation de Terraform
-  filename      = "../lambda_converter/dummy_package.zip"
-  package_type  = "Zip"
-  handler       = "index.handler" 
-  runtime       = "python3.12"
-  # ----------------------------
-  
+  package_type  = "Image" # <-- CORRECT : Définir comme type Image
   function_name = "${local.project_name}-parquet-converter"
   role          = aws_iam_role.lambda_parquet_converter_role.arn
   timeout       = 120
   memory_size   = 512
+  
+  image_uri     = "${aws_ecr_repository.lambda_converter_repo.repository_url}:latest"
 
   environment {
     variables = { S3_BUCKET_NAME = aws_s3_bucket.data_lake.bucket }
   }
 }
 
-# 9. Le branchement SQS -> Lambda (inchangé)
+# 6. Le branchement SQS -> Lambda
 resource "aws_lambda_event_source_mapping" "sqs_trigger" {
   event_source_arn                 = aws_sqs_queue.events_queue.arn
   function_name                    = aws_lambda_function.parquet_converter.arn
