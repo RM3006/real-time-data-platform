@@ -220,3 +220,6 @@ crash.log
 # Ignore les fichiers d'environnement virtuel Python
 **/wiki_env/
 **/dbt_env
+
+# Bundle de tous les dossiers & fichier nécessaires à Codebuild
+source.zip
