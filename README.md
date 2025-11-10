@@ -4,25 +4,27 @@ This project constructs a robust, cloud-native platform designed to ingest, proc
 
 The entire system is automated, from infrastructure provisioning with Terraform to data transformation orchestration with Airflow.
 
+---
+
 Key Features
 
-    Real-Time Ingestion: Captures and processes data with end-to-end latency in seconds.
-    Infrastructure as Code (IaC): All AWS infrastructure (S3, SQS, IAM, ECR, CodeBuild, Lambda) is defined and managed using Terraform for full reproducibility.
-    Scalable & Serverless: Built on AWS SQS and Lambda to automatically handle any volume of data, from a few events per second to millions.
-    Optimized Storage: Uses S3 as a Data Lake, converting raw JSON into date-partitioned Parquet files for massive cost and performance gains.
-    Automated Data Modeling: Uses dbt Core for complex, testable, and version-controlled data transformations, including advanced sessionization logic.
-    Production-Grade Orchestration: Employs Apache Airflow (via Docker Compose) to schedule and monitor the entire dbt transformation pipeline.
-    CI/CD for Data: Features an automated build pipeline using AWS CodeBuild to reliably build and deploy the Lambda function's Docker image, solving complex dependency and architecture issues.
+1. Real-Time Ingestion: Captures and processes data with end-to-end latency in seconds.
+2. Infrastructure as Code (IaC): All AWS infrastructure (S3, SQS, IAM, ECR, CodeBuild, Lambda) is defined and managed using Terraform for full reproducibility.
+3. Scalable & Serverless: Built on AWS SQS and Lambda to automatically handle any volume of data, from a few events per second to millions.
+4. Optimized Storage: Uses S3 as a Data Lake, converting raw JSON into date-partitioned Parquet files for massive cost and performance gains.
+5. Automated Data Modeling: Uses dbt Core for complex, testable, and version-controlled data transformations, including advanced sessionization logic.
+6. Production-Grade Orchestration: Employs Apache Airflow (via Docker Compose) to schedule and monitor the entire dbt transformation pipeline.
+7. CI/CD for Data: Features an automated build pipeline using AWS CodeBuild to reliably build and deploy the Lambda function's Docker image, solving complex dependency and architecture issues.
 
 Tech Stack
 
-    Infrastructure : Terraform : Infrastructure as Code (IaC) for all AWS resources.
-    Cloud Platform : AWS : S3 (Data Lake), SQS (Queue), Lambda (Processing), ECR (Image Registry), CodeBuild (CI/CD)
-    Containerization : Docker : Packaging the data producer & the Lambda function.
-    Data Warehouse : Snowflake : Cloud data platform for storage and analytics.
-    Ingestion : Snowpipe : Continuous, automated loading from S3 to Snowflake.
-    Transformation : dbt Core : Data modeling, testing, and sessionization.
-    Orchestration : Apache Airflow : Scheduling and monitoring the dbt pipeline.
+1. Infrastructure : Terraform : Infrastructure as Code (IaC) for all AWS resources.
+2. Cloud Platform : AWS : S3 (Data Lake), SQS (Queue), Lambda (Processing), ECR (Image Registry), CodeBuild (CI/CD)
+3. Containerization : Docker : Packaging the data producer & the Lambda function.
+4. Data Warehouse : Snowflake : Cloud data platform for storage and analytics.
+5. Ingestion : Snowpipe : Continuous, automated loading from S3 to Snowflake.
+6. Transformation : dbt Core : Data modeling, testing, and sessionization.
+7. Orchestration : Apache Airflow : Scheduling and monitoring the dbt pipeline.
 
 ---
 
