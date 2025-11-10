@@ -44,7 +44,7 @@ resource "aws_iam_policy" "codebuild_policy" {
         ],
         Resource = [
           aws_s3_bucket.data_lake.arn,
-          "${aws_s3_bucket.data_lake.arn}/*"
+          "${aws_s3_bucket.data_lake.arn}/realtime_data_platform_events/source.zip"
         ]
       }
     ]
@@ -99,7 +99,7 @@ resource "aws_codebuild_project" "image_builder" {
   source {
     type      = "NO_SOURCE"
     # type      = "S3"
-    #location  = "${aws_s3_bucket.data_lake.id}/source.zip"
+    #location  = "${aws_s3_bucket.data_lake.id}/realtime_data_platform_events/source.zip"
     buildspec = <<-EOF
       version: 0.2
 
@@ -110,7 +110,7 @@ resource "aws_codebuild_project" "image_builder" {
         pre_build:
           commands:
             - echo "Downloading source code from S3..."
-            - aws s3 cp s3://$S3_BUCKET_NAME/source.zip .
+            - aws s3 cp s3://$S3_BUCKET_NAME/realtime_data_platform_events/source.zip .
             - echo "Unzipping source code..."
             - unzip source.zip
             - echo "Logging in to Amazon ECR..."

@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: realtime_platform
+    database: REALTIME_DATA_PLATFORM_DB
+    schema: RAW
+
+    tables:
+      - name: RAW_REALTIME_DATA_EVENTS
+        description: "Raw event data ingested via Snowpipe from S3 Parquet files."
+        columns:
+          - name: RAW_DATA
+            description: "The raw JSON event payload as a VARIANT."

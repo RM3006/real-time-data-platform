@@ -1,0 +1,1 @@
+SELECT * FROM {{ ref('fact_sessions') }} WHERE session_duration_seconds < 0

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: fact_sessions
+    description: "Aggregated table showing one row per session, joined with user info."
+    columns:
+      - name: session_id
+        description: "The unique identifier for the session (Primary Key)."
+        tests:
+          - unique
+          - not_null
+      
+      - name: user_id
+        description: "The user ID for this session (Foreign Key)."
+        tests:
+          - not_null
+          # This test ensures every user_id in fact_sessions
+          # also exists in our stg_users table.
+          - relationships:
+              to: ref('users')
+              field: user_id

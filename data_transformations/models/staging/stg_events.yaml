@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: "Cleansed and type-casted event data from the raw source. One row per event."
+    columns:
+      - name: event_id
+        description: "The unique identifier for the event."
+        tests:
+          - unique
+          - not_null
+
+      - name: event_type
+        description: "The type of event that occurred."
+        tests:
+          - accepted_values:
+              values: ['page_view', 'add_to_cart', 'checkout', 'product_view']
+
+      - name: event_at_ts
+        description: "The timestamp when the event occurred."
+        tests:
+          - not_null
+
+      - name: user_id
+        description: "The user who performed the event."
+        tests:
+          - not_null
