@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: int_events_sessionized
+    description: "Events from stg_events, with a session_id added. One row per event."
+    columns:
+      - name: event_id
+        description: "The unique event ID."
+        tests:
+          - unique
+          - not_null
+      
+      - name: session_id
+        description: "The calculated session ID for this event."
+        tests:
+          - not_null

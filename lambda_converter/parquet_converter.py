@@ -52,7 +52,7 @@ def lambda_handler(event, context):
     now = datetime.utcnow()
     # Créer un nom de fichier unique pour éviter les écrasements
     file_name = f"events_{now.strftime('%Y%m%d%H%M%S')}_{context.aws_request_id}.parquet"
-    s3_key = f"{now.strftime('%Y/%m/%d')}/{file_name}"
+    s3_key = f"realtime_data_platform_events/raw_data_events/{now.strftime('%Y/%m/%d')}/{file_name}"
 
     try:
         print(f"Écriture de {len(data_list)} enregistrements dans le fichier {s3_key} sur le bucket {S3_BUCKET_NAME}...")
