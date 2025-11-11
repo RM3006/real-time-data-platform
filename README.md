@@ -143,7 +143,7 @@ Phase 2: Build & Push the Lambda Image (CodeBuild)
 Now that the ECR repository and CodeBuild project exist, we build our application image.
 
 1. Package Source: At the project root, create a source.zip file containing all project files (except .git, .terraform, etc.).
-2. Upload to S3: Upload the package to the correct path (replace YOUR_BUCKET_NAME): aws s3 cp ./source.zip s3://YOUR_BUCKET_NAME/realtime_data_platform_events/source.zip
+2. Upload to S3: Upload the package to the correct path : aws s3 cp ./source.zip s3://realtime-platform-data-lake-0xbdu2rf/realtime_data_platform_events/source.zip
 3. Start Build: Manually trigger CodeBuild to build the image and push it to ECR: aws codebuild start-build --project-name realtime-platform-image-builder --source-version source.zip
 4. Monitor: Go to the AWS CodeBuild console and wait for this build to succeed.
 
