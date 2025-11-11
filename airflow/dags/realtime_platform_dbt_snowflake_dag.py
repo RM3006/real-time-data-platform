@@ -12,7 +12,7 @@ with DAG(
     dag_id="dbt_realtime_platform_workflow",
     start_date=pendulum.datetime(2025, 1, 1, tz="Europe/Paris"),
     # Schedule defines how often the dag will run. Currently, the dag is set to run every tuesday at 2:30 AM, Paris timezone.
-    schedule="30 2 * * 2", 
+    schedule="42 16 * * 2", 
     catchup=False,
     doc_md="""
     ### dbt Workflow for the Real-Time Data Platform
