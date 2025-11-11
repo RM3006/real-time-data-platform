@@ -3,17 +3,16 @@ import pendulum
 from airflow.models.dag import DAG
 from airflow.operators.bash import BashOperator
 
-# Define the absolute path to your dbt project *inside* the Airflow containers.
-# We'll set this up in the next step.
+# Path to dbt project *inside* the Airflow containers.
 DBT_PROJECT_DIR = "/opt/airflow/dbt/data_transformations"
-# Define the path to your dbt profiles directory
+# Path to dbt profiles directory
 DBT_PROFILES_DIR = "/opt/airflow/dbt_profiles"
 
 with DAG(
     dag_id="dbt_realtime_platform_workflow",
     start_date=pendulum.datetime(2025, 1, 1, tz="Europe/Paris"),
-    # This defines how often the workflow runs.
-    schedule="30 2 * * 2",  # You can change this to "@hourly", "*/15 * * * *" (every 15 min), or None.
+    # Schedule defines how often the dag will run. Currently, the dag is set to run every tuesday at 2:30 AM, Paris timezone.
+    schedule="30 2 * * 2", 
     catchup=False,
     doc_md="""
     ### dbt Workflow for the Real-Time Data Platform
@@ -43,5 +42,5 @@ with DAG(
         bash_command=f"dbt test --project-dir {DBT_PROJECT_DIR} --profiles-dir {DBT_PROFILES_DIR} --target realtime_db_target",
     )
 
-    # Define the order of operations: seed -> run -> test
+    # Defining the order of the tasks within the dag: seed -> run -> test
     dbt_seed_task >> dbt_run_task >> dbt_test_task

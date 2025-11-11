@@ -1,3 +1,4 @@
+# Dummy code to generate the lambda function in AWS with CodeBuild in a second step
 import json
 
 def handler(event, context):
