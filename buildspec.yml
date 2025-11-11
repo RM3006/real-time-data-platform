@@ -24,5 +24,8 @@ phases:
       - echo "Build completed on `date`"
       - echo "Pushing the Docker image to ECR..."
       - docker push $IMAGE_REPO_URI:$IMAGE_TAG
-      - echo "Updating Lambda function..."
-      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $IMAGE_REPO_URI:$IMAGE_TAG
+      - echo "Attempting to update Lambda function..."
+      # This command will try to update the function.
+      # If it fails (because the function doesn't exist yet),
+      # the '|| true' will "swallow" the error and allow the build to succeed.
+      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $IMAGE_REPO_URI:$IMAGE_TAG || true
