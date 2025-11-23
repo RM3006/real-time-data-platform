@@ -14,14 +14,41 @@ models:
         description: "The type of event that occurred."
         tests:
           - accepted_values:
-              values: ['page_view', 'add_to_cart', 'checkout', 'product_view']
+              arguments: 
+                values: ['page_view', 'add_to_cart', 'checkout', 'product_view','remove_from_cart']
 
       - name: event_at_ts
         description: "The timestamp when the event occurred."
         tests:
           - not_null
 
+      # - name: user_id
+      #   description: "The user who performed the event."
+      #   tests:
+      #     - not_null:
+      #       severity: warn
+
+      # - name: product_id
+      #   description: "The product ID associated with the event. Can be NULL or an 'orphan' ID."
+      #   tests:
+      #     - not_null:
+      #         where: "event_type in ('add_to_cart', 'remove_from_cart', 'product_view')"
+      #         severity: warn
       - name: user_id
-        description: "The user who performed the event."
+        description: "The user who performed the event. Can be NULL for 'guest' users."
         tests:
-          - not_null
+          # --- REMOVED: 'not_null' test is no longer valid. ---
+          # We now allow NULL user_IDs for guest sessions.
+          - not_null:
+              arguments:
+                severity: error
+
+
+      - name: product_id
+        description: "The product ID associated with the event. Can be NULL or an 'orphan' ID."
+        tests:
+          # We test for referential integrity in the mart layer, not here.
+          - not_null:
+              arguments:
+                where: "event_type not in ('page_view')"
+                severity: error 

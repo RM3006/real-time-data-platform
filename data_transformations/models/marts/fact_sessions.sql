@@ -27,12 +27,17 @@ session_metrics as (
         ) as session_duration_seconds,
         
         count(distinct event_id) as total_events_in_session,
+
+        sum(case when event_type ='checkout' then value else 0 end) as total_session_revenue,
+        sum(case when event_type ='add_to_cart' then 1 else 0 end) as total_items_added_to_cart,
         
         count(distinct 
             case 
                 when event_type = 'product_view' then product_id 
             end
-        ) as distinct_products_viewed
+        ) as distinct_products_viewed,
+
+        max(utm_source) as session_utm_source
 
     from sessions
     group by 1, 2
@@ -47,7 +52,9 @@ select
     m.session_ended_at_ts,
     m.session_duration_seconds,
     m.total_events_in_session,
-    m.distinct_products_viewed
+    m.total_session_revenue,
+    m.total_items_added_to_cart,
+    m.session_utm_source
 from session_metrics as m
 left join stg_users as u
     on m.user_id = u.user_id

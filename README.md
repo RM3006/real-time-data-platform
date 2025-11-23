@@ -158,12 +158,14 @@ Now that our Docker image exists in ECR, we can run Terraform a second time to c
 
 Phase 4: Run the Pipeline
 
-1.  Start Producer: Run the Docker producer to generate data:
+1. Build the Docker image to get the latest version of the generate_events.py script. Run in the terminal :
+    `docker build -t realtime-producer:v1 ./producer`
+2.  Start Producer: Run the Docker producer to generate data:
     `docker run --rm -v ${HOME}/.aws:/root/.aws realtime-producer:v1`
-2.  Verify Ingestion: Check your `RAW_REALTIME_DATA_EVENTS` table in Snowflake. Data should arrive via Snowpipe.
-3.  Start Airflow: `cd airflow` and run `docker compose up -d`.
-4.  Run dbt Workflow: Go to `http://localhost:8080`, log in, and trigger the `dbt_realtime_platform_workflow` DAG.
-5.  Check Results: Query your final `FACT_SESSIONS` table in Snowflake.
+3.  Verify Ingestion: Check your `RAW_REALTIME_DATA_EVENTS` table in Snowflake. Data should arrive via Snowpipe.
+4.  Start Airflow: `cd airflow` and run `docker compose up -d`.
+5.  Run dbt Workflow: Go to `http://localhost:8080`, log in, and trigger the `dbt_realtime_platform_workflow` DAG.
+6.  Check Results: Query your final `FACT_SESSIONS` table in Snowflake.
 
 
 ---

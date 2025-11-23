@@ -17,5 +17,7 @@ models:
           # This test ensures every user_id in fact_sessions
           # also exists in our stg_users table.
           - relationships:
-              to: ref('users')
-              field: user_id
+              arguments:
+                to: ref('users')
+                field: user_id
+                severity: error

@@ -1,8 +1,101 @@
-product_id,product_name,category
-prod-0001,Quantum Laptop,Electronics
-prod-0002,Stellar Smartphone,Electronics
-prod-0003,Cloud-Comfort T-Shirt,Apparel
-prod-0004,Nebula Skincare Set,Beauty
-prod-0005,Fusion Fitness Mat,Sports
-prod-0006,Glowing Powder,Beauty
-prod-0007,Luminescent Bike,Sports
+product_id,product_name,category,price
+prod-0001,Quantum Laptop,Electronics,850.00
+prod-0002,Stellar Smartphone,Electronics,600.00
+prod-0003,Cloud-Comfort T-Shirt,Apparel,25.50
+prod-0004,Nebula Skincare Set,Beauty,45.00
+prod-0005,Fusion Fitness Mat,Sports,30.00
+prod-0006,Glowing Powder,Beauty,18.99
+prod-0007,Luminescent Bike,Sports,320.00
+prod-0008,Hyper-View VR Headset,Electronics,299.99
+prod-0009,Sonic Boom Speaker,Electronics,89.50
+prod-0010,Quant-Core Processor,Electronics,250.00
+prod-0011,Nano-Pixel Camera,Electronics,450.00
+prod-0012,Cyber-Link Router,Electronics,120.00
+prod-0013,Deep-Bass Earbuds,Electronics,55.00
+prod-0014,Holo-Display Monitor,Electronics,350.00
+prod-0015,Mech-Key Keyboard,Electronics,85.00
+prod-0016,Precision Optical Mouse,Electronics,45.00
+prod-0017,Solar-Charge Powerbank,Electronics,35.00
+prod-0018,Thermal-Tech Jacket,Apparel,110.00
+prod-0019,Aero-Flex Running Shoes,Apparel,95.00
+prod-0020,Carbon-Fiber Sunglasses,Apparel,150.00
+prod-0021,Hydro-Repel Hiking Boots,Apparel,130.00
+prod-0022,Omni-Stretch Yoga Pants,Apparel,45.00
+prod-0023,Vortex Windbreaker,Apparel,65.00
+prod-0024,Chroma-Shift Hoodie,Apparel,55.00
+prod-0025,Zero-G Compression Socks,Apparel,15.00
+prod-0026,Urban-Drift Beanie,Apparel,20.00
+prod-0027,Bio-Knit Scarf,Apparel,25.00
+prod-0028,Smart-Brew Coffee Maker,Home,120.00
+prod-0029,Robo-Sweep Vacuum,Home,250.00
+prod-0030,Insta-Pot Pressure Cooker,Home,99.00
+prod-0031,Aqua-Pure Filter Jug,Home,30.00
+prod-0032,Chef-Master Knife Set,Home,85.00
+prod-0033,Cozy-Cloud Pillow,Home,40.00
+prod-0034,Bamboo-Silk Sheets,Home,75.00
+prod-0035,Aroma-Mist Diffuser,Home,35.00
+prod-0036,Silent-Breeze Fan,Home,60.00
+prod-0037,Eco-Glow LED Bulb,Home,12.00
+prod-0038,Radiance-Boost Serum,Beauty,38.00
+prod-0039,Hydra-Glow Moisturizer,Beauty,32.00
+prod-0040,Silk-Touch Foundation,Beauty,28.00
+prod-0041,Volumizing Lash Wand,Beauty,15.00
+prod-0042,Berry-Burst Lip Tint,Beauty,12.00
+prod-0043,Charcoal-Detox Mask,Beauty,20.00
+prod-0044,Vitamin-C Revitalizer,Beauty,42.00
+prod-0045,Zen-Balance Supplement,Beauty,25.00
+prod-0046,Deep-Sleep Melatonin,Beauty,18.00
+prod-0047,Pro-Shine Hair Oil,Beauty,22.00
+prod-0048,Trail-Blazer Backpack,Sports,85.00
+prod-0049,Summit-Seeker Tent,Sports,180.00
+prod-0050,Hydro-Flask Bottle,Sports,35.00
+prod-0051,Grip-Max Climbing Gloves,Sports,25.00
+prod-0052,Speed-Demon Bicycle,Sports,450.00
+prod-0053,Core-Strength Kettlebell,Sports,40.00
+prod-0054,Flex-Resistance Bands,Sports,15.00
+prod-0055,Pro-Spin Tennis Racket,Sports,110.00
+prod-0056,Wave-Rider Surfboard,Sports,350.00
+prod-0057,Snow-Drift Goggles,Sports,75.00
+prod-0058,Sky-High Drone,Toys,220.00
+prod-0059,Build-A-Bot Kit,Toys,45.00
+prod-0060,Galactic-Warriors Action Figure,Toys,25.00
+prod-0061,Puzzle-Master 3000,Toys,20.00
+prod-0062,Speed-Racer RC Car,Toys,55.00
+prod-0063,Magic-Spell Board Game,Toys,35.00
+prod-0064,Artist-Pro Sketchpad,Toys,15.00
+prod-0065,Clay-Create Modeling Set,Toys,18.00
+prod-0066,Digi-Pet Virtual Friend,Toys,12.00
+prod-0067,Star-Gazer Telescope,Toys,150.00
+prod-0068,Ultra-Wide Curved Monitor,Electronics,480.00
+prod-0069,Retro-Game Console,Electronics,180.00
+prod-0070,Smart-Home Hub,Electronics,95.00
+prod-0071,Noise-Cancel Headset,Electronics,160.00
+prod-0072,Action-Cam 4K,Electronics,210.00
+prod-0073,E-Reader Paperwhite,Electronics,130.00
+prod-0074,Portable Projector,Electronics,280.00
+prod-0075,Wireless Charging Pad,Electronics,25.00
+prod-0076,Smart-Watch Elite,Electronics,220.00
+prod-0077,Fitness-Tracker Band,Electronics,60.00
+prod-0078,Vintage-Wash Denim,Apparel,75.00
+prod-0079,Silk-Blend Blouse,Apparel,55.00
+prod-0080,Classic-Leather Belt,Apparel,30.00
+prod-0081,Canvas-Tote Bag,Apparel,20.00
+prod-0082,Waterproof Trench Coat,Apparel,140.00
+prod-0083,Graphic-Print Tee,Apparel,22.00
+prod-0084,Formal-Wear Blazer,Apparel,115.00
+prod-0085,Summer-Breeze Dress,Apparel,60.00
+prod-0086,Winter-Warm Gloves,Apparel,25.00
+prod-0087,Snapback Cap,Apparel,18.00
+prod-0088,Modular-Shelf Unit,Home,85.00
+prod-0089,Ergonomic-Office Chair,Home,210.00
+prod-0090,Velvet-Throw Blanket,Home,45.00
+prod-0091,Minimalist-Desk Lamp,Home,35.00
+prod-0092,Ceramic-Plant Pot,Home,15.00
+prod-0093,Geometric-Area Rug,Home,120.00
+prod-0094,Wall-Art Canvas,Home,50.00
+prod-0095,Scented-Soy Candle,Home,18.00
+prod-0096,Glass-Water Carafe,Home,25.00
+prod-0097,Stainless-Steel Straws,Home,10.00
+prod-0098,Exfoliating-Body Scrub,Beauty,24.00
+prod-0099,Rose-Water Toner,Beauty,16.00
+prod-0100,Sun-Protect SPF50,Beauty,28.00

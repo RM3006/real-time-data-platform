@@ -8,7 +8,20 @@ with stg_events as (
     select * from {{ ref('stg_events') }}
 ),
 
--- Step 1: Calculate the 'is_new_session' flag using LAG
+-- Step 1: Calculate the 'value' field using the product prices in products_snapshot
+events_with_prices as (
+    select
+    e.*,
+    coalesce(e.quantity * p.price,null) as value
+
+    from stg_events e
+    left join products_snapshot p
+    ON  e.product_id = p.product_id
+    AND e.event_at_ts >= p.dbt_valid_from
+    AND e.event_at_ts <= coalesce(p.dbt_valid_to,'9999-12-31'::timestamp)
+),
+
+-- Step 2: Calculate the 'is_new_session' flag using LAG
 events_with_new_session_flag as (
     select
         *,
@@ -29,10 +42,10 @@ events_with_new_session_flag as (
             else 0
         end as is_new_session
 
-    from stg_events
+    from events_with_prices
 ),
 
--- Step 2: Calculate the session index using SUM on the pre-calculated flag
+-- Step 3: Calculate the session index using SUM on the pre-calculated flag
 events_with_session_index as (
     select
         *,
@@ -44,13 +57,21 @@ events_with_session_index as (
     from events_with_new_session_flag
 )
 
--- Step 3: Create the final unique session ID
+-- Step 4: Create the final unique session ID and include new dimensions
 select
     event_id,
     event_type,
     user_id,
     product_id,
+    order_id,        
+    value,           
+    quantity,        
     platform,
+    ip_address,      
+    user_agent,      
+    utm_source,      
+    utm_medium,      
+    utm_campaign,    
     event_at_ts,
-    user_id || '-' || to_char(session_index) as session_id
+    coalesce(user_id,'guest') || '-' || to_char(session_index) as session_id
 from events_with_session_index
